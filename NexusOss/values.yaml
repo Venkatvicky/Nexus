@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: sonatype/nexus3
-  tag: "3.35.0"
+  tag: "3.71.0"
   pullPolicy: IfNotPresent
 
 service:

@@ -2,4 +2,4 @@ apiVersion: v2
 name: nexus-oss
 description: A Helm chart for Sonatype Nexus OSS
 version: 1.0.0
-appVersion: "3.35.0"
+appVersion: "3.71.0"

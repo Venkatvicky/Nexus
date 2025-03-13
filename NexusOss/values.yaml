@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: sonatype/nexus3
+  tag: "3.35.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 8081
+  name: nexus
+
+ingress:
+  enabled: true
+  annotations: {}
+  hosts:
+    - host: nexus.example.com
+      paths: ["/"]
+  tls: []
+  
+resources:
+  limits:
+    memory: "2Gi"
+    cpu: "1"
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
+
+persistence:
+  enabled: true
+  storageClass: gp3-csi
+  size: 10Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

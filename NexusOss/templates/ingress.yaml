@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nexus-oss
+  annotations: {{ toYaml .Values.ingress.annotations | nindent 4 }}
+spec:
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ . }}
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-oss
+                port:
+                  name: http
+          {{- end }}
+    {{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+      - {{ .hosts | join ", " }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
